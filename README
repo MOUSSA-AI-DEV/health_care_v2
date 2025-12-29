@@ -1,0 +1,231 @@
+Unity Care Clinic – Backoffice V2
+1. Présentation du projet
+
+Unity Care Clinic V2 est une application web PHP 8 orientée objet destinée à la gestion complète du parcours patient au sein d’une clinique médicale.
+Cette version étend les fonctionnalités existantes en intégrant un système d’authentification sécurisé, un contrôle d’accès par rôles (RBAC), la gestion des rendez-vous, des prescriptions médicales, ainsi que des statistiques avancées.
+
+Le projet a été réalisé dans un objectif pédagogique, en respectant les bonnes pratiques PHP OOP, la sécurité web et une architecture maintenable et évolutive.
+
+2. Objectifs pédagogiques
+
+Mettre en œuvre une architecture OOP propre et modulaire
+
+Implémenter une authentification sécurisée avec sessions PHP
+
+Appliquer un contrôle d’accès basé sur les rôles
+
+Manipuler une base de données via PDO et requêtes préparées
+
+Sécuriser une application contre XSS, CSRF et injections SQL
+
+Concevoir et expliquer une application à l’oral (UML, OOP, logique métier)
+
+3. Rôles utilisateurs
+
+L’application gère trois types d’utilisateurs :
+
+Rôle	Description
+Admin	Gestion globale de la plateforme
+Doctor	Gestion des rendez-vous et prescriptions
+Patient	Prise et suivi des rendez-vous et prescriptions
+
+Chaque rôle possède des droits strictement définis et vérifiés à chaque accès.
+
+4. Fonctionnalités principales
+Authentification & Sessions
+
+Connexion via email + mot de passe
+
+Mots de passe hashés avec password_hash()
+
+Vérification avec password_verify()
+
+Sessions PHP ($_SESSION)
+
+Déconnexion sécurisée
+
+Redirection automatique selon le rôle
+
+Contrôle d’accès (RBAC)
+
+Vérification du rôle sur chaque page protégée
+
+Accès interdit redirigé vers une page sécurisée
+
+Permissions respectant strictement le cahier des charges
+
+Gestion des rendez-vous
+
+Création, lecture, mise à jour, annulation
+
+Statuts : scheduled, done, cancelled
+
+Accès limité aux rendez-vous concernés
+
+Historique par utilisateur
+
+Gestion des prescriptions
+
+Création de prescriptions par les médecins
+
+Liaison Doctor – Patient – Medication
+
+Historique des prescriptions reçues (Patient)
+
+Historique des prescriptions créées (Doctor)
+
+Administration
+
+Gestion du catalogue de médicaments
+
+Visualisation de tous les rendez-vous
+
+Filtres par statut et par médecin
+
+Statistiques
+
+Rendez-vous par statut
+
+Rendez-vous par médecin
+
+Évolution mensuelle
+
+Médicaments les plus prescrits
+
+5. Sécurité de l’application
+
+L’application respecte les standards de sécurité suivants :
+
+XSS : échappement systématique des sorties (htmlspecialchars)
+
+CSRF : tokens générés et vérifiés sur tous les formulaires
+
+SQL Injection : requêtes préparées avec PDO
+
+Mots de passe : hashage sécurisé
+
+Sessions : vérification systématique de l’authentification
+
+Accès : restriction stricte par rôle
+
+6. Architecture technique
+Organisation générale
+
+Architecture MVC simplifiée
+
+Séparation claire :
+
+Models (logique métier)
+
+Controllers (traitement)
+
+Views (affichage)
+
+OOP & Héritage
+
+Classe abstraite User
+
+Classes enfants : Admin, Doctor, Patient
+
+Classe BaseModel pour les méthodes communes :
+
+find()
+
+findAll()
+
+save()
+
+delete()
+
+Classes principales
+
+User, Admin, Doctor, Patient
+
+Appointment
+
+Prescription
+
+Medication
+
+Auth, CSRF, Validator, Security
+
+7. Structure du projet
+app/
+ ├── Core/
+ ├── Models/
+ ├── Controllers/
+ ├── Config/
+ └── Helpers/
+
+public/
+ ├── index.php
+ ├── login.php
+ └── assets/
+
+views/
+ ├── admin/
+ ├── doctor/
+ ├── patient/
+ └── partials/
+
+database/
+ ├── schema.sql
+ └── seed.sql
+
+docs/
+ ├── UML_Class_Diagram.png
+ ├── UML_UseCase_Diagram.png
+ └── ERD.png
+
+8. Installation
+Prérequis
+
+PHP ≥ 8.0
+
+MySQL / MariaDB
+
+Serveur local (XAMPP, WAMP, MAMP)
+
+Étapes
+
+Cloner le repository
+
+Importer database/schema.sql
+
+Importer database/seed.sql
+
+Configurer les accès DB dans app/Config/database.php
+
+Lancer via le dossier public/
+
+9. Comptes de test
+Rôle	Email	Mot de passe
+Admin	admin@clinic.com
+	admin123
+Doctor	doctor@clinic.com
+	doctor123
+Patient	patient@clinic.com
+	patient123
+10. UML & Documentation
+
+Diagramme de classes UML
+
+Diagramme de cas d’utilisation
+
+Diagramme ERD
+
+Disponibles dans le dossier /docs
+
+11. Présentation orale
+
+5 minutes : démonstration fonctionnelle
+
+10 minutes : explication technique :
+
+OOP & héritage
+
+Authentification & sécurité
+
+BaseModel & PDO
+
+RBAC & sessions
