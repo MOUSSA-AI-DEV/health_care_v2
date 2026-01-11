@@ -19,11 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($action === 'cancel') {
             $repo->cancelAsDoctor($id, Auth::id());
         } elseif ($action === 'done') {
-            $repo->markDone($id, Auth::id());
+
+            $repo ->markDone($id, Auth::id());
         }
     }
 
-    header('Location: appointments.php');
+    header('Location: appointment.php');
     exit;
 }
 

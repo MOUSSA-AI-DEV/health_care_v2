@@ -13,8 +13,8 @@ $presRepo = new PrescriptionRepository();
 $userRepo = new UserRepository();
 $medRepo  = new MedicationRepository();
 
-$patients = $userRepo->allPatients();     // tu dois l’ajouter si pas encore
-$meds     = $medRepo->all();              // tu dois l’ajouter si pas encore
+$patients = $userRepo->allPatients();     
+$meds     = $medRepo->all();              
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     CSRF::verify($_POST['_csrf'] ?? null);
@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-$prescriptions = $presRepo->forDoctor(Auth::id());   // ← aussi nécessaire
+$prescriptions = $presRepo->forDoctor(Auth::id());   
 
-// ✅ LIGNE MANQUANTE (CAUSE DE LA PAGE BLANCHE)
 require VIEW_PATH . '/doctor/prescriptions.php';

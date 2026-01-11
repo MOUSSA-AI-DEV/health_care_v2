@@ -1,3 +1,3 @@
 <?php
-define('BASE_URL', '/health_care_clinic_v2/public/');
-define('APP_NAME', 'Unity Care Clinic');
+define('BASE_PATH', dirname(__DIR__, 2));
+define('VIEW_PATH', BASE_PATH . '/views');

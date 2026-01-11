@@ -1,13 +1,14 @@
 <?php
-session_start();
+require __DIR__ . '/_boot.php';
 
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../app/Config/database.php';
+use App\Core\Auth;
 
-$controllerName = $_GET['controller'] ?? 'auth';
-$action = $_GET['action'] ?? 'login';
+Auth::requireLogin();
 
-$controllerClass = 'App\\Controllers\\' . ucfirst($controllerName) . 'Controller';
+$role = Auth::role();
 
-$controller = new $controllerClass($pdo);
-$controller->$action();
+if ($role === 'admin')  header('Location: '.BASE_URL.'/admin/index.php');
+if ($role === 'doctor') header('Location: '.BASE_URL.'/doctor/index.php');
+if ($role === 'patient')header('Location: '.BASE_URL.'/patient/index.php');
+
+exit;
